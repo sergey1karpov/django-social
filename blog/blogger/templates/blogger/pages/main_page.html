@@ -1,0 +1,19 @@
+{% extends "blogger/base.html" %}
+
+{% block title %} Crap! What a story! {% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.get_username }}. Thanks for logging in.</p>
+    {% else %}
+<!--        <p>Welcome, new user. Please log in.</p>-->
+        <div class="d-flex h-100 text-center ">
+            <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+                <main class="px-3">
+                    <h1>Главная страница сайта</h1>
+                    <p class="lead">Здесь будут выводится посты по рейтингу от всех пользователей</p>
+                </main>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
