@@ -5,6 +5,8 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
+from user_profile.models import UserProfile
+
 
 def registration(request):
     if request.method == 'GET':
@@ -16,6 +18,8 @@ def registration(request):
             password=request.POST.get('password'),
             email=request.POST.get('email'),
         )
+
+        UserProfile.objects.create(user=user)
 
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
         return redirect(reverse('blogger:main_page'), user=user)

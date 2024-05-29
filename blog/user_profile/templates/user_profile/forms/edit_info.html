@@ -1,0 +1,43 @@
+{% extends "user_profile/base.html" %}
+
+{% block title %} Изменить профиль {% endblock %}
+
+{% block content %}
+<div class="row d-flex justify-content-center">
+        <div class="col-6">
+            <form method="post" action="{% url 'user_profile:edit_information' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Домашний телефон</label>
+                    <input name="phone_number" type="text" class="form-control" value="{{ user.profile.phone_number }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Мобильный телефон</label>
+                    <input name="mobile_number" type="text" class="form-control" value="{{ user.profile.mobile_number }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Город</label>
+                    <input name="city" type="text" class="form-control" value="{{ user.profile.city }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Страна</label>
+                    <input name="country" type="text" class="form-control" value="{{ user.profile.country }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Должность</label>
+                    <input name="job_title" type="text" class="form-control" value="{{ user.profile.job_title }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Компания</label>
+                    <input name="company" type="text" class="form-control" value="{{ user.profile.company }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Аватар</label>
+                    <input name="avatar" class="form-control" type="file" id="formFile">
+                </div>
+                <button type="submit" class="btn btn-primary">Изменить</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
