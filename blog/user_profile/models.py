@@ -1,17 +1,25 @@
 from PIL import Image
 from django.contrib.auth.models import User
 from django.db import models
+from django.core.validators import MaxLengthValidator, MinLengthValidator, FileExtensionValidator
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True)
-    phone_number = models.CharField(max_length=20, null=True, blank=True, unique=True)
-    mobile_number = models.CharField(max_length=20, null=True, blank=True, unique=True)
-    city = models.CharField(max_length=20, null=True, blank=True)
-    country = models.CharField(max_length=20, null=True, blank=True)
-    job_title = models.CharField(max_length=50, null=True, blank=True)
-    company = models.CharField(max_length=50, null=True, blank=True)
-    avatar = models.ImageField(upload_to='images/user_avatars', default='', null=True)
+    phone_number = models.CharField(max_length=20, null=True, blank=True, unique=True,
+                                    validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    mobile_number = models.CharField(max_length=20, null=True, blank=True, unique=True,
+                                     validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    city = models.CharField(max_length=20, null=True, blank=True,
+                            validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    country = models.CharField(max_length=20, null=True, blank=True,
+                               validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    job_title = models.CharField(max_length=50, null=True, blank=True,
+                                 validators=[MaxLengthValidator(50), MinLengthValidator(5)])
+    company = models.CharField(max_length=50, null=True, blank=True,
+                               validators=[MaxLengthValidator(50), MinLengthValidator(5)])
+    avatar = models.ImageField(upload_to='images/user_avatars', default='', null=True,
+                               validators=[FileExtensionValidator(['jpeg', 'jpg', 'png'])])
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

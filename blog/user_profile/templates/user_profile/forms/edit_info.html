@@ -3,10 +3,38 @@
 {% block title %} Изменить профиль {% endblock %}
 
 {% block content %}
+
+{% if messages %}
+    {% for error in messages %}
+        <div class="d-flex justify-content-center">
+            <div class="col-6 alert alert-danger">
+                {{ error }}
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
 <div class="row d-flex justify-content-center">
         <div class="col-6">
             <form method="post" action="{% url 'user_profile:edit_information' %}" enctype="multipart/form-data">
                 {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Имя</label>
+                    <input name="first_name" type="text" class="form-control" value="{{ user.first_name }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Фамилия</label>
+                    <input name="last_name" type="text" class="form-control" value="{{ user.last_name }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Имя пользователя</label>
+                    <input name="username" type="text" class="form-control" value="{{ user.username }}">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" value="{{ user.email }}">
+                </div>
+                <hr class="mb-2 mt-2">
                 <div class="mb-3">
                     <label class="form-label">Домашний телефон</label>
                     <input name="phone_number" type="text" class="form-control" value="{{ user.profile.phone_number }}">
