@@ -14,12 +14,15 @@
                     <h5 class="text-dark h4">Crap! What a story!</h5>
                     <div class="row">
                         {% if request.user.is_authenticated %}
-                            <div class="col-12 text-center">
+                            <div class="col-6 text-center">
+                                <a href="{% url 'user_profile:profile_information' %}" class="nav-link">Профиль</a>
+                            </div>
+                            <div class="col-6 text-center">
                                 <a href="{% url 'auth_module:logout' %}" class="nav-link">Выход</a>
                             </div>
                         {% else %}
                             <div class="col-6 text-center">
-                                <a href="{% url 'auth_module:registration' %}" class="nav-link">Регистрация</a>
+                                <a href="{% url 'auth_module:registration' %}" class="nav-link">Регистрация+</a>
                             </div>
                             <div class="col-6 text-center">
                                 <a href="{% url 'auth_module:login' %}" class="nav-link">Вход</a>
