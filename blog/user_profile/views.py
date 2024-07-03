@@ -6,12 +6,13 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
+from blogger.models import BlogPost
 
 
 @login_required(login_url='auth_module:login')
 def profile_info(request):
     user = request.user
-    return render(request, 'user_profile/profile_info.html', {user: user})
+    return render(request, 'user_profile/profile_info.html', {'user': user, 'posts': user.blog_posts.all()})
 
 
 @login_required(login_url='auth_module:login')

@@ -6,20 +6,13 @@ from django.core.validators import MaxLengthValidator, MinLengthValidator, FileE
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile', null=True)
-    phone_number = models.CharField(max_length=20, null=True, blank=True, unique=True,
-                                    validators=[MaxLengthValidator(20), MinLengthValidator(5)])
-    mobile_number = models.CharField(max_length=20, null=True, blank=True, unique=True,
-                                     validators=[MaxLengthValidator(20), MinLengthValidator(5)])
-    city = models.CharField(max_length=20, null=True, blank=True,
-                            validators=[MaxLengthValidator(20), MinLengthValidator(5)])
-    country = models.CharField(max_length=20, null=True, blank=True,
-                               validators=[MaxLengthValidator(20), MinLengthValidator(5)])
-    job_title = models.CharField(max_length=50, null=True, blank=True,
-                                 validators=[MaxLengthValidator(50), MinLengthValidator(5)])
-    company = models.CharField(max_length=50, null=True, blank=True,
-                               validators=[MaxLengthValidator(50), MinLengthValidator(5)])
-    avatar = models.ImageField(upload_to='images/user_avatars', default='', null=True,
-                               validators=[FileExtensionValidator(['jpeg', 'jpg', 'png'])])
+    phone_number = models.CharField(max_length=20, blank=True, default='', unique=True, validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    mobile_number = models.CharField(max_length=20, blank=True, default='', unique=True,validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    city = models.CharField(max_length=20, blank=True, default='', validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    country = models.CharField(max_length=20, blank=True, default='', validators=[MaxLengthValidator(20), MinLengthValidator(5)])
+    job_title = models.CharField(max_length=50, blank=True, default='', validators=[MaxLengthValidator(50), MinLengthValidator(5)])
+    company = models.CharField(max_length=50, blank=True, default='', validators=[MaxLengthValidator(50), MinLengthValidator(5)])
+    avatar = models.ImageField(upload_to='images/user_avatars', default='', validators=[FileExtensionValidator(['jpeg', 'jpg', 'png'])])
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)

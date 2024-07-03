@@ -5,7 +5,7 @@ services:
   db:
     restart: always
     image: postgres
-    container_name: demo-postgres #you can change this
+    container_name: demo-postgres 
     environment:
       - POSTGRES_USER=demo
       - POSTGRES_PASS=demo
@@ -19,7 +19,7 @@ services:
 
   pgadmin:
       image: dpage/pgadmin4
-      container_name: demo-pgadmin #you can change this
+      container_name: demo-pgadmin 
       depends_on:
         - db
       ports:

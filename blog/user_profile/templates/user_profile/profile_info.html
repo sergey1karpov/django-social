@@ -9,7 +9,9 @@
             <div class="col-lg-4">
                 <div class="card mb-4">
                     <div class="card-body text-center">
-                        <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid" style="width: 150px;">
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}" class="rounded-circle img-fluid" style="width: 150px;">
+                        {% endif %}    
                         <h5 class="my-3">{{ user.username }}</h5>
                         <p class="text-muted mb-1">Full Stack Developer</p>
                         <p class="text-muted mb-4">Bay Area, San Francisco, CA</p>
@@ -91,11 +93,29 @@
                         </div>
                     </div>
                 </div>
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                {% if messages %}
+                                    {% for error in messages %}
+                                        <div class="d-flex justify-content-center">
+                                            <div class="col-6 alert alert-danger">
+                                                {{ error }}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                                {% include "blogger/posts/create_post.html" %} 
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card mb-4 mb-md-0">
                             <div class="card-body">
-                                posts
+                                {% include "blogger/posts/last_5_posts.html" with posts=posts %} 
                             </div>
                         </div>
                     </div>

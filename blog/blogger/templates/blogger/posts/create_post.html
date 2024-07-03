@@ -1,0 +1,23 @@
+<form action="{% url 'blogger:create_post' %}" method="POST" enctype='multipart/form-data'>
+    {% csrf_token %}
+    <h5>Create new post</h5>
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input type="text" name="title" class="form-control" id="exampleFormControlInput1">
+    </div>  
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Short description</label>
+        <textarea name="short_description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>  
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Full description</label>
+        <textarea name="full_description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>   
+    <div class="mb-3">
+        <label for="formFile" class="form-label">Photo</label>
+        <input name="photo" class="form-control" type="file" id="formFile">
+    </div>
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">Create post</button>
+    </div>
+</form>    
